@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
+Route::group(['namespace' => 'App\Http\Livewire'], function () {
+    Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function() {
+        Route::get('/login', Login::class)->name('auth.login');
+        Route::get('/register', Register::class)->name('auth.register');
+    });
+    Route::get('/', Index::class)->name('index');
 });
